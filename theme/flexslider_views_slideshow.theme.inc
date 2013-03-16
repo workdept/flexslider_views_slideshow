@@ -83,8 +83,8 @@ function _flexslider_views_slideshow_preprocess_flexslider_views_slideshow_main_
     $settings['vss_id'] = $vss_id;
   }
 
-  // Load the FlexSlider library for use
-  drupal_add_library('flexslider', 'flexslider');
+  // Load the FlexSlider library for use.
+  libraries_load('flexslider');
 
   // Create the settings container
   // Due to a limitation inside of views_slideshow, the ID for the settings container
