@@ -2,11 +2,26 @@
   // @todo convert to use Drupal.behaviors
   // @todo add configuration options
 
+  function fixFlexsliderHeight() {
+    // Set fixed height based on the tallest slide
+    $('.flexslider').each(function(){
+        var sliderHeight = 0;
+        $(this).find('.slides > li').each(function(){
+            slideHeight = $(this).height();
+            if (sliderHeight < slideHeight) {
+                sliderHeight = slideHeight;
+            }
+        });
+        $(this).find('ul.slides').css({'height' : sliderHeight});
+    });
+  }
+
   // Register callback to save references to flexslider instances. Allows
   // Views Slideshow controls to affect the slider
   function flexslider_views_slideshow_register(fullId, slider) {
     Drupal.flexsliderViewsSlideshow.active = Drupal.flexsliderViewsSlideshow.active || {};
     Drupal.flexsliderViewsSlideshow.active[fullId] = slider;
+    fixFlexsliderHeight();
   }
 
   Drupal.behaviors.flexsliderViewsSlideshow = {
